@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/static/opendata/ATM.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/Institution.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/Local.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/Markets.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/Parking.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/StandVendor.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/Stands.csv" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/static/opendata/name.csv" charset="Big5" />
+  </component>
+</project>

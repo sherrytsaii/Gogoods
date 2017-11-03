@@ -1,0 +1,42 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+{% endblock %}
+
+{% block body %}
+    <title>Login</title>
+    <div id="contact" class="container">
+        <h3 class="text-center">Login</h3>
+
+        <div class="row">
+            <div>
+                <form role="form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_username" name="username" placeholder="Username"
+                                   type="text" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_password" name="password" placeholder="Password"
+                                   type="password" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.non_field_errors }}
+                            </lable>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-9 form-group">
+                            <a class="btn col-sm-offset-9" type="button" href="{% url 'register' %}">註冊</a>
+                            <input class="btn pull-right" type="submit" value="登入">
+                            <input type="hidden" name="next" value={% url 'home' %}>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+{% endblock %}
+
+{% block body %}
+    <div id="contact" class="container">
+        <h3 class="text-center">{{ stand.name }}</h3>
+        <a type="button" class="btn pull-right" href="{% url 'stand' %}">返回</a>
+        <a type="button" class="btn pull-right" style="margin-bottom: 10px;margin-right: 10px;" href="{% url 'newTrans' id=stand.id %}">新增交易</a>
+
+        <div class="bs-example bs-example-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#trans" id="trans-tab" data-toggle="tab" aria-controls="general"
+                       aria-expanded="true">交易紀錄</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="trans" aria-labelledby="trans-tab" data-status="general">
+                    {% include 'member/vendor/transList.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

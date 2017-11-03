@@ -1,0 +1,126 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE56YtAdHbQg5_cUjhSyxwaKlPcuMgQ5M&signed_in=true&libraries=places&callback=initMap"
+            async defer></script>
+    <script>
+        var map;
+        var infowindow;
+
+        function initMap() {
+            var mapProp = {
+
+                zoom: 12,
+                scrollwheel: true,
+                draggable: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            infowindow = new google.maps.InfoWindow();
+
+            map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            createMaker();
+
+        }
+
+        function createMaker() {
+            var geocoder = new google.maps.Geocoder();
+            var myCenter = new google.maps.LatLng();
+            var addr = "{{ post.addr }}";
+
+            geocoder.geocode({address: addr},
+                    function (result, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            myCenter = result[0].geometry.location;
+                            map.setCenter(myCenter);
+
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: myCenter,
+                                title: "{{ post.name }}",
+                            });
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infowindow.setContent("{{ post.name }}");
+                                infowindow.open(map, this);
+                            });
+
+                            infowindow.setPosition(myCenter);
+                            infowindow.setContent("{{ post.name }}");
+                            infowindow.open(map);
+
+                        } else {
+                            alert('解析失敗!回傳狀態為:' + status);
+                        }
+                    });
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div style="background-color: #FDF5E6">
+        <div class="container">
+
+            <div id="head">
+                <h4>{{ post.name }}</h4>
+            </div>
+
+            <div id="postdetail">
+                <div>
+                    <div style="float: left;width: 30%">
+                        <h3>市集種類：{{ post.category }}</h3>
+                    </div>
+                    <div style="float: right">
+                        <h3>地址：{{ post.addr }}</h3>
+                    </div>
+                    <br>
+                    <div id="desc">
+                        <h3>市集簡介</h3>
+                        <p>{{ post.desc }}~</p>
+                    </div>
+                    <div id="desc">
+                        <h3>名攤列表</h3>
+                        <div>
+                            <div style="margin: auto">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>攤位名稱</th>
+                                        <th>連絡電話</th>
+                                        <th>熱門商品</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for s in stand_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ s.stand.name }}</td>
+                                            <td>{{ s.stand.phone }}</td>
+                                            <td>{{ s.stand.desc }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="googleMap"></div>
+
+    </div>
+
+
+    <footer class="text-center">
+        <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p>Bootstrap Theme Made By <a href="http://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a>
+        </p>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block body %}
+    <title>會員中心</title>
+    <div id="contact" class="container">
+        {% if success == True %}
+            <div id="msgDiv" class="alert alert-success" role="alert">
+                <h5 class="text-center">{{ message }}</h5>
+            </div>
+        {% endif %}
+
+        <div id="desc">
+            <h3 class="text-center">會員中心</h3>
+            <div>
+                <div style="float: left">
+                    <p>姓名：{{ request.user.first_name }}{{ request.user.last_name }}</p>
+                    <p>帳號：{{ request.user.username }}</p>
+                    <p>Email：{{ request.user.email }}</p>
+                    <p>建立時間：{{ request.user.date_joined }}</p>
+                    <p>最後登入時間：{{ request.user.last_login }}</p>
+                    {% if perms.market.can_buy %}
+                        <p>紅利點數：{{ request.user.profile.bonus }}</p>
+                    {% endif %}
+                    <a class="btn pull-right" type="button" href="{% url 'editMember' %}">編輯</a>
+                </div>
+            {% load staticfiles %}
+                <div style="float: right">
+                    <div class="item active">
+                        <img src="{% static 'img/memberPic.jpg' %}" width="325"
+                             height="325">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'module/base.html' %}
+{% block script %}
+    <script>
+        function edit(sdvd) {
+            var field = [sdvd + "_1", sdvd + "_2", sdvd + "_3"];
+            for (i = 0; i < 3; i++) {
+                document.getElementById(field[i]).disabled = false;
+            }
+            ;
+            document.getElementById(sdvd + "_editField").style.display = "none";
+            document.getElementById(sdvd + "_delField").style.display = "none";
+            document.getElementById(sdvd + "_finField").style.display = "block";
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    <title>{{ vendor.username }}</title>
+    <div id="contact" class="container">
+        <h3 class="text-center">{{ vendor.last_name }}a攤位</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>StandName</th>
+                <th>StandPhone</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for vdsd in vendor_stand %}
+
+                {% csrf_token %}
+                <tr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <th>{{ forloop.counter }}</th>
+                        <th><input id="{{ vdsd.id }}_1" name="name" type="text" size='15'
+                                   value="{{ vdsd.stand.name }}" disabled></th>
+                        <th><input id="{{ vdsd.id }}_2" name="phone" type="text" size='15'
+                                   value="{{ vdsd.stand.phone }}" disabled></th>
+                        <th><input id="{{ vdsd.id }}_3" name="desc" type="text" size='50'
+                                   value="{{ vdsd.stand.desc }}" disabled></th>
+                        <th>
+                            <button id="{{ vdsd.id }}_finField" name="updata" type="submit" style="display: none"
+                                    value="{{ vdsd.id }}">完成
+                            </button>
+                            <button id="{{ vdsd.id }}_editField" type="button" onClick="edit('{{ vdsd.id }}');"
+                                    style="display: block">修改
+                            </button>
+                        </th>
+                        <th>
+                            <button id="{{ vdsd.id }}_delField" name="delete" type="submit" style="display: block"
+                                    value="{{ vdsd.id }}">刪除
+                            </button>
+                        </th>
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+{% endblock %}

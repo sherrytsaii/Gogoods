@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">GoGoods</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if request.user.is_superuser %}
+                    <li><a>Hi~管理員大人</a></li>
+                    <li><a href="/home/#market">市集吧</a></li>
+                    <li><a href="{% url 'mainMag' %}">會員管理</a></li>
+                    <li><a href="/accounts/logout/">登出</a></li>
+                {% elif perms.market.can_buy %}
+                    <li><a>Hi~{{ request.user.last_name }}</a></li>
+                    <li><a href="/home/#market">市集吧</a></li>
+                    <li><a href="{% url 'buyerTranslations' %}">逛客福利</a></li>
+                    <li><a href="{% url 'memberDetail' %}">會員中心</a></li>
+                    <li><a href="/accounts/logout/">登出</a></li>
+                {% elif perms.market.can_sell %}
+                    <li><a>Hi~{{ request.user.last_name }}</a></li>
+                    <li><a href="/home/#market">市集吧</a></li>
+                    <li><a href="{% url 'stand' %}">商家經營</a></li>
+                    <li><a href="{% url 'memberDetail' %}">會員中心</a></li>
+                    <li><a href="/accounts/logout/">登出</a></li>
+                {% else %}
+                    <li><a href="/home/#market">市集吧</a></li>
+                    <li><a href="{% url 'login' %}">登入</a></li>
+                    <li><a href="{% url 'register' %}">註冊</a></li>
+                {% endif %}
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">關於購酷
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.facebook.com/profile.php?id=100000326990444&fref=ts">Team長</a></li>
+                        <li><a href="https://www.facebook.com/qiu.y.hua?fref=ts">209小精靈</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100002059089156&fref=ts">煞氣a涵</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100000169883138">名先</a></li>
+                        <li><a href="https://www.facebook.com/panyiying?fref=ts">潘姊</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,92 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block body %}
+    <title>Register</title>
+    <div id="contact" class="container">
+        <h3 class="text-center">Register</h3>
+
+        <div class="row">
+            <div>
+                <form role="form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="username" name="username" placeholder="Username" type="text">
+                            <lable class="control-label" style="color:red;">
+                                {{ form.username.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_password1" name="password1" placeholder="Password" type="password" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.password1.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_password2" name="password2"
+                                   placeholder="Password Confirmation" type="password" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.password2.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_email" name="email" placeholder="Email" type="email"
+                                   required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.email.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_first_name" name="first_name" placeholder="姓氏"
+                                   type="text" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.first_name.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_last_name" name="last_name" placeholder="名字" type="text"
+                                   required>
+                            <lable class="control-label" style="color:red;">
+                                {{ form.last_name.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+                    <div class="row radio">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <label>
+                                <input type="radio" name="identity" id="buyer" value="buyer" checked>
+                                我是逛客
+                            </label>
+                            &nbsp;&nbsp;&nbsp;
+{#                            <label>#}
+{#                                <input type="radio" name="identity" id="vendor" value="vendor">#}
+{#                                我是商家#}
+{#                            </label>#}
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-9 form-group">
+                            <input class="btn pull-right" type="submit" value="註冊">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'module/base.html' %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block body %}
+    <title>Edit</title>
+    <div id="contact" class="container">
+        {% if success == True %}
+            <div id="msgDiv" class="alert alert-success" role="alert">
+                <h5 class="text-center">{{ message }}</h5>
+            </div>
+        {% endif %}
+        <h3 class="text-center">編輯會員</h3>
+
+        <div class="row">
+            <div>
+                <div class="text-center">
+                    <p>帳號：{{ request.user.username }}</p>
+                </div>
+                <form role="form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_first_name" name="first_name" placeholder="姓氏"
+                                   type="text" value="{{ f.instance.first_name }}" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ f.first_name.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_last_name" name="last_name" placeholder="名字" type="text"
+                                   value="{{ f.instance.last_name }}" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ f.last_name.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-group">
+                            <input class="form-control" id="id_email" name="email" placeholder="Email" type="email"
+                                   value="{{ f.instance.email }}" required>
+                            <lable class="control-label" style="color:red;">
+                                {{ f.email.errors.as_text }}
+                            </lable>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-9 form-group">
+                            <input class="btn pull-right" type="submit" value="確定">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

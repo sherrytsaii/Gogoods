@@ -1,0 +1,66 @@
+{% extends 'module/base.html' %}
+{% block script %}
+    <script>
+        function edit(u) {
+            var field = [u + "_1", u + "_2", u + "_3", u + "_4"];
+            for (i = 0; i < 4; i++) {
+                document.getElementById(field[i]).disabled = false;
+            }
+            ;
+            document.getElementById(u + "_editField").style.display = "none";
+            document.getElementById(u + "_delField").style.display = "none";
+            document.getElementById(u + "_finField").style.display = "block";
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    <title>買家會員管理</title>
+    <div id="contact" class="container">
+        <h3 class="text-center">買家會員管理</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>E-mail</th>
+                <th>Bonus</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for u in buyer %}
+
+                {% csrf_token %}
+                <tr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <th>{{ forloop.counter }}</th>
+                        <th>{{ u.username }}</th>
+                        <th><input id="{{ u.username }}_1" name="first_name" type="text" size='5'
+                                   value="{{ u.first_name }}" disabled required></th>
+                        <th><input id="{{ u.username }}_2" name="last_name" type="text" size='8'
+                                   value="{{ u.last_name }}" disabled required></th>
+                        <th><input id="{{ u.username }}_3" name="email" type="email" size='20' value="{{ u.email }}"
+                                   disabled required></th>
+                        <th><input id="{{ u.username }}_4" name="bonus" type="text" size='5'
+                                   value="{{ u.profile.bonus }}" disabled required></th>
+                        <th>
+                            <button id="{{ u.username }}_finField" name="updata" type="submit" style="display: none"
+                                    value="{{ u.username }}">完成
+                            </button>
+                            <button id="{{ u.username }}_editField" type="button" onClick="edit('{{ u.username }}');"
+                                    style="display: block">修改
+                            </button>
+                        </th>
+                        <th>
+                            <button id="{{ u.username }}_delField" name="d  elete" type="submit" style="display: block"
+                                    value="{{ u.username }}">刪除
+                            </button>
+                        </th>
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+{% endblock %}

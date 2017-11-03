@@ -1,0 +1,26 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>消費攤位</th>
+        <th>金額</th>
+        <th>使用紅利</th>
+        <th>獲得紅利</th>
+        <th>備註</th>
+        <th>交易時間</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for t in trans_list %}
+        <tr id="trt{{ t.id }}">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ t.marketStand.stand }}</td>
+            <td>{{ t.charge }}</td>
+            <td>{{ t.used_bonus }}</td>
+            <td>{{ t.add_bonus }}</td>
+            <td>{{ t.desc }}</td>
+            <td>{{ t.trans_time }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
